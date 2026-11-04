@@ -1,6 +1,7 @@
 node_modules/
 var/
 .env
+opencode.json
 coverage/
 .vitest/
 .rumdl_cache/
