@@ -1,6 +1,6 @@
 ---
 description: Reviews git diffs for bugs, regressions and contract violations. Use before committing or merging. Does not fix — only reports findings.
-mode: primary
+mode: subagent
 permission:
   read: allow
   edit: deny
