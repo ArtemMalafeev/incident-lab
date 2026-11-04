@@ -4,6 +4,7 @@ import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { once } from "node:events";
+import { searchUrl } from "../public/api.js";
 
 let child: ChildProcess;
 let dir: string;
@@ -107,6 +108,14 @@ describe("running application", () => {
 
   test("searches available catalog products using the server contract", async () => {
     const response = await fetch(`${base}/api/search?q=${encodeURIComponent("книга")}`);
+    expect(response.status).toBe(200);
+    expect(await response.json()).toMatchObject({
+      products: [{ id: 1, name: "Книга об архитектуре" }],
+    });
+  });
+
+  test("client search URL matches the server contract", async () => {
+    const response = await fetch(`${base}${searchUrl("книга")}`);
     expect(response.status).toBe(200);
     expect(await response.json()).toMatchObject({
       products: [{ id: 1, name: "Книга об архитектуре" }],
